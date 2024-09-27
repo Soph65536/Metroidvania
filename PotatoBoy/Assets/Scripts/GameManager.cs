@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     //player
     public Vector3 SpawnPosition;
 
+    public SpriteRenderer boomerangRenderer;
+    public bool gotBoomerang;
+
     void Awake()
     {
         //makes sure there is only one gamemanager instance and sets that instance to this
@@ -27,5 +30,9 @@ public class GameManager : MonoBehaviour
         }
 
         SpawnPosition = new Vector3(0, 6, 0);
+
+        boomerangRenderer = GameObject.FindGameObjectWithTag("PlayerWeapon").GetComponentInChildren<SpriteRenderer>();
+        boomerangRenderer.enabled = false;
+        gotBoomerang = false;
     }
 }

@@ -5,21 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //constants
-    const float deathdelay = 1f;
-    const float respawndelay = 1.75f;
-
-    const float moveForce = 5f;
-    const float jumpForce = 10f;
+    const float moveForce = 4f;
+    const float jumpForce = 7f;
 
     //variables
-    private bool isDead;
-
     private float horizontalInput;
-    private float verticalInput;
+    private float facingRight;
     public bool onGround;
 
     Animator animator;
     Rigidbody2D rb;
+
+    DeathScript DeathScript;
+    Boomerang Boomerang;
 
     void Start()
     {
@@ -28,22 +26,21 @@ public class PlayerMovement : MonoBehaviour
         //define rigidbody
         rb = transform.GetComponent<Rigidbody2D>();
 
+        //define other scripts
+        DeathScript = GetComponent<DeathScript>();
+        Boomerang = GetComponent<Boomerang>();
+
         //setting initial variables
-        isDead = false;
-
         horizontalInput = 0;
-        verticalInput = 0;
+        facingRight = -1;
         onGround = false;
-
-        //set animator to play respawn on start
-        animator.SetTrigger("PlayerRespawn");
     }
 
 
     void FixedUpdate()
     {
-        //only allow player to be controlled when not dead
-        if (!isDead)
+        //only allow player to be controlled when not dead or boomering
+        if (!DeathScript.isDead && !Boomerang.currentlyBoomering)
         {
             //movement
             if (Input.GetKey(KeyCode.Space) && onGround)
@@ -54,42 +51,27 @@ public class PlayerMovement : MonoBehaviour
 
             //get input axis raw
             horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
+            //move based on input
+            transform.position += Vector3.right * horizontalInput * moveForce * Time.deltaTime;
+
+            //set facing right based on last direction walked
+            if (horizontalInput != 0) { facingRight = horizontalInput; }
 
             //set animator parameters
             animator.SetFloat("horizontal", horizontalInput);
-            animator.SetFloat("vertical", verticalInput);
+            animator.SetFloat("facingRight", facingRight);
         }
-    }
-
-
-    //kill player coroutine
-    public IEnumerator KillPlayer()
-    {
-        isDead = true;
-
-        //play death animation and wait for player death delay
-        animator.SetTrigger("PlayerDeath");
-        yield return new WaitForSeconds(deathdelay);
-
-        //respawn player and wait for respawn animation
-        transform.position = GameManager.Instance.SpawnPosition;
-        animator.SetTrigger("PlayerRespawn");
-        yield return new WaitForSeconds(respawndelay);
-
-        isDead = false;
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //if collided with ground or checkpoint and not falling then grounded is true
-        //else is false
-        if ((collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Checkpoint")
+        if ((collision.gameObject.tag == "Ground")
             && (rb.velocity.y > -00.1 && rb.velocity.y < 0.01))
         {
             onGround = true;
-            animator.SetBool("onGround", true);
+            animator.SetFloat("onGround", 1);
         }
     }
 
@@ -97,16 +79,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //reset grounded since not colliding with anything
         onGround = false;
-        animator.SetBool("onGround", false);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        //if collided with enemy go to startingpos
-        if (collider.gameObject.tag == "Enemy" && !isDead)
-        {
-            StartCoroutine("KillPlayer");
-        }
+        animator.SetFloat("onGround", 0);
     }
 }
