@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //constants
-    const float moveForce = 4f;
+    const float moveForce = 5f;
     const float jumpForce = 7f;
 
     //variables

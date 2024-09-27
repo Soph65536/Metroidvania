@@ -6,7 +6,7 @@ public class PotatoPickup : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             GameManager.Instance.boomerangRenderer.enabled = true;
             GameManager.Instance.gotBoomerang = true;
