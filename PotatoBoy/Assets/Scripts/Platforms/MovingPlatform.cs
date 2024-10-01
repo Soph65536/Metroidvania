@@ -6,8 +6,8 @@ public class MovingPlatform : MonoBehaviour
 {
     const float movingSpeed = 0.005f;
 
-    public Vector3 position1;
-    public Vector3 position2;
+    [SerializeField] private Vector3 position1;
+    [SerializeField] private Vector3 position2;
 
     private bool movingToPos2;
 
@@ -27,8 +27,8 @@ public class MovingPlatform : MonoBehaviour
     {
         Vector3 targetPosition;
 
-        if (movingToPos2) { targetPosition = position2; }
-        else { targetPosition = position1; }
+        //sets target position based on moving to pos 2
+        targetPosition = movingToPos2 ? position2 : position1;
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, movingSpeed);
 
