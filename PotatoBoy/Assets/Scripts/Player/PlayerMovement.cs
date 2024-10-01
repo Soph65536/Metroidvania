@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //if collided with ground or checkpoint and not falling then grounded is true
         if ((collision.gameObject.tag == "Ground")
-            && (rb.velocity.y > -00.1 && rb.velocity.y < 0.01))
+            && (rb.velocity.y > -0.1 && rb.velocity.y < 0.1))
         {
             onGround = true;
             animator.SetFloat("onGround", 1);
