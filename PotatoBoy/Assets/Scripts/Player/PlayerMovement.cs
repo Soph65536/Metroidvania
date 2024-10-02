@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     DeathScript DeathScript;
     Boomerang Boomerang;
+    Jetpack Jetpack;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         //define other scripts
         DeathScript = GetComponent<DeathScript>();
         Boomerang = GetComponent<Boomerang>();
+        Jetpack = GetComponent<Jetpack>();
 
         //setting initial variables
         horizontalInput = 0;
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (!DeathScript.isDead && !Boomerang.currentlyBoomering)
         {
             //movement
-            if (Input.GetKey(KeyCode.Space) && onGround)
+            if (!Jetpack.isJetpacking && Input.GetKey(KeyCode.Space) && onGround)
             {
                 //jump
                 rb.velocity = new Vector3(0, jumpForce, 0);

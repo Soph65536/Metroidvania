@@ -10,18 +10,21 @@ public class Boomerang : MonoBehaviour
     public Animator playeranimator;
     public Animator boomeranganimator;
 
+    DeathScript DeathScript;
+
     public bool currentlyBoomering;
 
     // Start is called before the first frame update
     void Start()
     {
+        DeathScript = GetComponent<DeathScript>();
         currentlyBoomering = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!currentlyBoomering && GameManager.Instance.gotBoomerang && Input.GetKeyDown(KeyCode.F))
+        if (!DeathScript.isDead && !currentlyBoomering && GameManager.Instance.gotBoomerang && Input.GetKeyDown(KeyCode.F))
         {
             StartCoroutine("doBoomerang");
         }
