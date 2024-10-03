@@ -9,6 +9,7 @@ public class Boomerang : MonoBehaviour
 
     public Animator playeranimator;
     public Animator boomeranganimator;
+    public Animator imageanimator;
 
     DeathScript DeathScript;
 
@@ -47,6 +48,7 @@ public class Boomerang : MonoBehaviour
             playeranimator.SetTrigger("BoomerangRight");
             boomeranganimator.SetTrigger("BoomerangRight");
         }
+        imageanimator.SetTrigger("Boomerang");
 
         yield return new WaitForSeconds(boomerangTime);
 
