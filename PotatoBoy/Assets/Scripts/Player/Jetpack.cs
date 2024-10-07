@@ -5,9 +5,9 @@ using UnityEngine;
 public class Jetpack : MonoBehaviour
 {
     const float jetpackForce = 3f;
-    const float maxJetpackMeter = 2000f;
+    public const float maxJetpackMeter = 2000f;
 
-    private float jetpackMeter;
+    public float jetpackMeter;
     public bool isJetpacking;
 
     //animator and rb script
