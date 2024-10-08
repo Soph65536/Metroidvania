@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //if collided with ground or checkpoint and not falling then grounded is true
-        if ((collision.gameObject.tag == "Ground")
+        if ((collision.gameObject.CompareTag("Ground"))
             && (rb.velocity.y > -0.1 && rb.velocity.y < 0.1))
         {
             onGround = true;
