@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    const float movingSpeed = 0.01f;
+    const float movingSpeed = 0.008f;
 
     [SerializeField] private Vector3 position1;
     [SerializeField] private Vector3 position2;
