@@ -42,7 +42,7 @@ public class DeathScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //if collided with enemy go to startingpos
-        if (collider.gameObject.tag == "Enemy" && !isDead)
+        if (collider.gameObject.CompareTag("Enemy") && !isDead)
         {
             StartCoroutine("KillPlayer");
         }
