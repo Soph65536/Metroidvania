@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TextPlayerCollisionPotatoCondition : MonoBehaviour
 {
-    public Renderer rend;
+    private Renderer rend;
+
+    [SerializeField] private bool gotBoomerangIsTrue;
 
     void Start()
     {
@@ -16,9 +18,16 @@ public class TextPlayerCollisionPotatoCondition : MonoBehaviour
     {
         //make text object visible if player has touched it and dont hvae the boomerang
 
-        if(collision.gameObject.tag=="Player" && !GameManager.Instance.gotBoomerang)
+        if(collision.gameObject.tag=="Player")
         {
-            rend.enabled=true;
+            if (gotBoomerangIsTrue)
+            {
+                if (GameManager.Instance.gotBoomerang) { rend.enabled = true; }
+            }
+            else
+            {
+                if (!GameManager.Instance.gotBoomerang) { rend.enabled = true; }
+            }
         }
     }
 

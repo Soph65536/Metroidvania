@@ -5,7 +5,7 @@ using UnityEngine;
 public class Jetpack : MonoBehaviour
 {
     const float jetpackForce = 3f;
-    public const float maxJetpackMeter = 2000f;
+    public const float maxJetpackMeter = 1000f;
 
     public float jetpackMeter;
     public bool isJetpacking;
