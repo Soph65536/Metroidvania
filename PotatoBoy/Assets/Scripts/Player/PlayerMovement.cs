@@ -22,13 +22,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        //spawn in the air above spawnposition
+        transform.position = new Vector3(0, 6, 0);
+
         //define animator
         animator = GetComponent<Animator>();
         //define rigidbody
         rb = transform.GetComponent<Rigidbody2D>();
 
         //define other scripts
-        DeathScript = GetComponent<DeathScript>();
+        DeathScript = GetComponentInChildren<DeathScript>();
         Boomerang = GetComponent<Boomerang>();
         Jetpack = GetComponent<Jetpack>();
 

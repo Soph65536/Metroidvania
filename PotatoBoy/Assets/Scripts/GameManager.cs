@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        SpawnPosition = new Vector3(0, 6, 0);
+        SpawnPosition = Vector3.zero;
 
         boomerangRenderer = GameObject.FindGameObjectWithTag("PlayerWeapon").GetComponentInChildren<SpriteRenderer>();
         boomerangRenderer.enabled = false;

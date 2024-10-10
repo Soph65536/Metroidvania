@@ -5,8 +5,9 @@ using UnityEngine;
 public class DeathScript : MonoBehaviour
 {
     //constants
+    const float startspawntime = 7.4f;
     const float deathdelay = 1f;
-    const float respawndelay = 1.75f;
+    const float respawndelay = 1.1f;
 
     //variables
     Animator animator;
@@ -17,9 +18,11 @@ public class DeathScript : MonoBehaviour
     void Start()
     {
         //define animator
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
 
         isDead = false;
+
+        StartCoroutine("SpawnPlayerControlsPrevention");
     }
 
     //kill player coroutine
@@ -32,11 +35,23 @@ public class DeathScript : MonoBehaviour
         yield return new WaitForSeconds(deathdelay);
 
         //respawn player and wait for respawn animation
-        transform.position = GameManager.Instance.SpawnPosition;
+        transform.parent.position = GameManager.Instance.SpawnPosition;
         animator.SetTrigger("PlayerRespawn");
         yield return new WaitForSeconds(respawndelay);
 
         isDead = false;
+    }
+
+    public IEnumerator SpawnPlayerControlsPrevention()
+    {
+        //sets player as dead at start of the game
+        //so they cant use the controls whilst the start cutscene plays
+
+        isDead=true;
+
+        yield return new WaitForSeconds (startspawntime);
+
+        isDead=false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

@@ -30,7 +30,7 @@ public class Jetpack : MonoBehaviour
 
         //set other player scripts
         PlayerMovement = GetComponent<PlayerMovement>();
-        DeathScript = GetComponent<DeathScript>();
+        DeathScript = GetComponentInChildren<DeathScript>();
         Boomerang = GetComponent<Boomerang>();
     }
 
