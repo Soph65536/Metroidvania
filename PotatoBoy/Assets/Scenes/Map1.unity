@@ -6295,7 +6295,7 @@ MonoBehaviour:
   gameMusic: {fileID: 217964069}
   playerAudio: {fileID: 1877297430}
   playerOneShotAudio: {fileID: 735661829}
-  endingAudio: {fileID: 0}
+  endingAudio: {fileID: 8300000, guid: 1a5fb6441699966438e7cc47969d5e86, type: 3}
 --- !u!224 &1801450646 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8038441153462917236, guid: 44c81a48da805b34387c45d4aa7536dd, type: 3}
