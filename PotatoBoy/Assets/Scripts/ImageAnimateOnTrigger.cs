@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ImageAnimateOnTrigger : MonoBehaviour
 {
+    //sound
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+
+    //animation
     [SerializeField] private Animator ImageAnimator;
     [SerializeField] private string AnimatorTrigger;
 
@@ -11,6 +16,7 @@ public class ImageAnimateOnTrigger : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(audioClip);
             ImageAnimator.SetTrigger(AnimatorTrigger);
             Destroy(gameObject);
         }

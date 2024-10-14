@@ -11,6 +11,9 @@ public class Boomerang : MonoBehaviour
     public Animator boomeranganimator;
     public Animator imageanimator;
 
+    [SerializeField] private AudioSource oneShotAudioSource;
+    [SerializeField] private AudioClip BoomerangSound;
+
     DeathScript DeathScript;
 
     public bool currentlyBoomering;
@@ -48,6 +51,8 @@ public class Boomerang : MonoBehaviour
             playeranimator.SetTrigger("BoomerangRight");
             boomeranganimator.SetTrigger("BoomerangRight");
         }
+
+        oneShotAudioSource.PlayOneShot(BoomerangSound);
         imageanimator.SetTrigger("Boomerang");
 
         yield return new WaitForSeconds(boomerangTime);

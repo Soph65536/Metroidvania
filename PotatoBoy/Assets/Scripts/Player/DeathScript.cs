@@ -9,6 +9,9 @@ public class DeathScript : MonoBehaviour
     const float deathdelay = 1f;
     const float respawndelay = 1.1f;
 
+    //audio
+    [SerializeField] private AudioSource gameMusic;
+
     //variables
     Animator animator;
 
@@ -50,6 +53,7 @@ public class DeathScript : MonoBehaviour
         isDead=true;
 
         yield return new WaitForSeconds (startspawntime);
+        gameMusic.Play();
 
         isDead=false;
     }

@@ -11,11 +11,16 @@ public class Enemy : MonoBehaviour
 
     private bool movingToPos2;
 
+    AudioSource audioSource;
+    [SerializeField] private AudioClip DeathSound;
+
     Animator animator;
 
     private void Start()
     {
         movingToPos2 = true;
+
+        audioSource = GetComponent<AudioSource>();
 
         animator = GetComponent<Animator>();
     }
@@ -50,6 +55,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("PlayerWeapon"))
         {
+            audioSource.PlayOneShot(DeathSound);
             Destroy(gameObject);
         }
     }

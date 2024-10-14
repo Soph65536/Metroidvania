@@ -13,6 +13,17 @@ public class PlayerMovement : MonoBehaviour
     private float facingRight;
     public bool onGround;
 
+    //sounds
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource oneShotAudioSource;
+
+    [SerializeField] private AudioClip WalkSound;
+    [SerializeField] private AudioClip JetpackSound;
+    [SerializeField] private AudioClip JumpSound;
+    [SerializeField] private AudioClip LandingSound;
+
+    //external
+
     Animator animator;
     Rigidbody2D rb;
 
@@ -39,6 +50,9 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = 0;
         facingRight = -1;
         onGround = false;
+
+        //audiosource
+        audioSource.clip = null;
     }
 
 
@@ -52,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 //jump
                 rb.velocity = new Vector3(0, jumpForce, 0);
+
+                oneShotAudioSource.PlayOneShot(JumpSound);
             }
 
             //get input axis raw
@@ -65,6 +81,25 @@ public class PlayerMovement : MonoBehaviour
             //set animator parameters
             animator.SetFloat("horizontal", horizontalInput);
             animator.SetFloat("facingRight", facingRight);
+
+            //jetpack and walk audio
+            if (Jetpack.isJetpacking)
+            {
+                audioSource.clip = JetpackSound;
+            }
+            else if (horizontalInput != 0 && onGround)
+            {
+                audioSource.clip = WalkSound;
+            }
+            else
+            {
+                audioSource.clip = null;
+            }
+
+            if(audioSource != null && !audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 
@@ -77,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
         {
             onGround = true;
             animator.SetFloat("onGround", 1);
+
+            oneShotAudioSource.PlayOneShot(LandingSound);
         }
     }
 
