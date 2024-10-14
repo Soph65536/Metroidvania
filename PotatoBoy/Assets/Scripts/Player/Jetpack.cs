@@ -5,7 +5,7 @@ using UnityEngine;
 public class Jetpack : MonoBehaviour
 {
     const float jetpackForce = 3f;
-    public const float maxJetpackMeter = 1000f;
+    public const float maxJetpackMeter = 150f;
 
     public float jetpackMeter;
     public bool isJetpacking;
@@ -34,7 +34,7 @@ public class Jetpack : MonoBehaviour
         Boomerang = GetComponent<Boomerang>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //refill jetpack meter if not using jetpack and is not at max
         if(PlayerMovement.onGround && !isJetpacking && jetpackMeter<maxJetpackMeter) { jetpackMeter++; }

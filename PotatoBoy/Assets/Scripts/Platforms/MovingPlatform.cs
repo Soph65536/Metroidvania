@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    const float movingSpeed = 0.008f;
+    const float movingSpeed = 3.5f;
 
     [SerializeField] private Vector3 position1;
     [SerializeField] private Vector3 position2;
@@ -30,7 +30,7 @@ public class MovingPlatform : MonoBehaviour
         //sets target position based on moving to pos 2
         targetPosition = movingToPos2 ? position2 : position1;
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, movingSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, movingSpeed * Time.deltaTime);
 
         if(transform.position == targetPosition) { movingToPos2 = !movingToPos2; }
     }
